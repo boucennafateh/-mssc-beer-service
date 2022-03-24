@@ -1,5 +1,6 @@
 package org.fate7.msscbeerservice.web.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,15 +37,18 @@ public class BeerDto {
 
     @NotNull
     @Positive
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal price;
 
     @Null
     private Integer version;
 
     @Null
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     private OffsetDateTime createdDate;
 
     @Null
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     private OffsetDateTime lastModifiedDate;
 
 }
