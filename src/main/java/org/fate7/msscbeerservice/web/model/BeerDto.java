@@ -30,8 +30,7 @@ public class BeerDto {
     private BeerStyle beerStyle;
 
     @NotNull
-    @Positive
-    private Long upc;
+    private String upc;
 
     private Integer quantityOnHand;
 
