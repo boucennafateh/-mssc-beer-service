@@ -3,6 +3,9 @@ package org.fate7.msscbeerservice.web.controller;
 import lombok.RequiredArgsConstructor;
 import org.fate7.msscbeerservice.services.BeerService;
 import org.fate7.msscbeerservice.web.model.BeerDto;
+import org.fate7.msscbeerservice.web.model.BeerPagedList;
+import org.fate7.msscbeerservice.web.model.BeerStyle;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,7 +18,31 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class BeerController {
 
+    private final Integer DEFAULT_PAGE_NUMBER = 1;
+    private final Integer DEFAULT_SIZE_NUMBER = 25;
+
     private final BeerService beerService;
+
+    @GetMapping(produces = {"application/json"})
+    public ResponseEntity<BeerPagedList> listBeers(
+            @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @RequestParam(value = "beerStyle", required = false) BeerStyle beerStyle,
+            @RequestParam(value = "beerName", required = false) String beerName
+            ){
+
+        if(pageNumber == null || pageNumber <0)
+            pageNumber = DEFAULT_PAGE_NUMBER;
+
+        if(pageSize == null || pageSize < 1)
+            pageSize = DEFAULT_SIZE_NUMBER;
+
+        BeerPagedList beerList = beerService.listBeers(beerName, beerStyle,
+                PageRequest.of(pageNumber, pageSize));
+
+        return new ResponseEntity<>(beerList, HttpStatus.OK);
+
+    }
 
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId){

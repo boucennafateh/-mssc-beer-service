@@ -6,9 +6,15 @@ import org.fate7.msscbeerservice.repositories.BeerRepository;
 import org.fate7.msscbeerservice.web.controller.NotFoundException;
 import org.fate7.msscbeerservice.web.mapper.BeerMapper;
 import org.fate7.msscbeerservice.web.model.BeerDto;
+import org.fate7.msscbeerservice.web.model.BeerPagedList;
+import org.fate7.msscbeerservice.web.model.BeerStyle;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -50,5 +56,33 @@ public class BeerServiceImpl implements BeerService{
             throw new NotFoundException("Beer Id " + beerId + " not found");
         });
         beerRepository.delete(beer);
+    }
+
+    @Override
+    public BeerPagedList listBeers(String beerName, BeerStyle beerStyle, PageRequest pageRequest) {
+        BeerPagedList beerPagedList;
+        Page<Beer> beerPage;
+
+        if(StringUtils.hasText(beerName) && StringUtils.hasText(beerStyle.name()))
+            beerPage = beerRepository.findAllByBeerNameAndBeerStyle(beerName, beerStyle, pageRequest);
+        else if(StringUtils.hasText(beerName) && !StringUtils.hasText(beerStyle.name()))
+            beerPage = beerRepository.findAllByBeerName(beerName, pageRequest);
+        else if(!StringUtils.hasText(beerName) && StringUtils.hasText(beerStyle.name()))
+            beerPage = beerRepository.findAllByBeerStyle(beerStyle, pageRequest);
+        else
+            beerPage = beerRepository.findAll(pageRequest);
+
+        return new BeerPagedList(
+                beerPage.getContent().stream()
+                        .map(beerMapper::toBeerDto)
+                        .collect(Collectors.toList()),
+                PageRequest.of(
+                        beerPage.getPageable().getPageNumber(),
+                        beerPage.getPageable().getPageSize()),
+                beerPage.getTotalElements()
+                );
+
+
+
     }
 }
