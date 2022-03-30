@@ -1,7 +1,12 @@
 package org.fate7.msscbeerservice.web.mapper;
 
+import org.fate7.msscbeerservice.Domain.Beer;
+import org.fate7.msscbeerservice.services.inventory.BeerInventoryService;
+import org.fate7.msscbeerservice.web.model.BeerDto;
+import org.springframework.beans.factory.annotation.Autowired;
+
 public abstract class BeerMapperDecorator implements BeerMapper {
-    /*private BeerMapper beerMapper;
+    private BeerMapper beerMapper;
     private BeerInventoryService beerInventoryService;
 
     @Autowired
@@ -21,8 +26,13 @@ public abstract class BeerMapperDecorator implements BeerMapper {
 
     @Override
     public BeerDto toBeerDto(Beer beer) {
+        return beerMapper.toBeerDto(beer);
+    }
+
+    @Override
+    public BeerDto toBeerDtoWithInventory(Beer beer) {
         BeerDto beerDto = beerMapper.toBeerDto(beer);
         beerDto.setQuantityOnHand(beerInventoryService.getOnHandInventory(beer.getId()));
         return beerDto;
-    }*/
+    }
 }
