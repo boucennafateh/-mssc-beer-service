@@ -5,6 +5,7 @@ import org.fate7.msscbeerservice.services.inventory.BeerInventoryService;
 import org.fate7.msscbeerservice.web.model.BeerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 public abstract class BeerMapperDecorator implements BeerMapper {
     private BeerMapper beerMapper;
     private BeerInventoryService beerInventoryService;

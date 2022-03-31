@@ -3,6 +3,7 @@ package org.fate7.msscbeerservice.Domain;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Beer {
     //todo: just for test
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Type(type="uuid-char")
     @Column(length = 36, columnDefinition = "varchar", nullable = false, updatable = false)
     private UUID id;
 

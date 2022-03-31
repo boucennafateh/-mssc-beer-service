@@ -7,7 +7,6 @@ import org.fate7.msscbeerservice.web.controller.NotFoundException;
 import org.fate7.msscbeerservice.web.mapper.BeerMapper;
 import org.fate7.msscbeerservice.web.model.BeerDto;
 import org.fate7.msscbeerservice.web.model.BeerPagedList;
-import org.fate7.msscbeerservice.web.model.BeerStyle;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -61,16 +60,16 @@ public class BeerServiceImpl implements BeerService{
     }
 
     @Override
-    public BeerPagedList listBeers(String beerName, BeerStyle beerStyle, PageRequest pageRequest,
+    public BeerPagedList listBeers(String beerName, String beerStyle, PageRequest pageRequest,
                                    Boolean showInventoryOnHand) {
         BeerPagedList beerPagedList;
         Page<Beer> beerPage;
 
-        if(StringUtils.hasText(beerName) && StringUtils.hasText(beerStyle.name()))
+        if(StringUtils.hasText(beerName) && StringUtils.hasText(beerStyle))
             beerPage = beerRepository.findAllByBeerNameAndBeerStyle(beerName, beerStyle, pageRequest);
-        else if(StringUtils.hasText(beerName) && !StringUtils.hasText(beerStyle.name()))
+        else if(StringUtils.hasText(beerName) && !StringUtils.hasText(beerStyle))
             beerPage = beerRepository.findAllByBeerName(beerName, pageRequest);
-        else if(!StringUtils.hasText(beerName) && StringUtils.hasText(beerStyle.name()))
+        else if(!StringUtils.hasText(beerName) && beerStyle != null)
             beerPage = beerRepository.findAllByBeerStyle(beerStyle, pageRequest);
         else
             beerPage = beerRepository.findAll(pageRequest);

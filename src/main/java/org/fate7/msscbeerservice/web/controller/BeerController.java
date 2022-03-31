@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.fate7.msscbeerservice.services.BeerService;
 import org.fate7.msscbeerservice.web.model.BeerDto;
 import org.fate7.msscbeerservice.web.model.BeerPagedList;
-import org.fate7.msscbeerservice.web.model.BeerStyle;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class BeerController {
 
-    private final Integer DEFAULT_PAGE_NUMBER = 1;
+    private final Integer DEFAULT_PAGE_NUMBER = 0;
     private final Integer DEFAULT_SIZE_NUMBER = 25;
 
     private final BeerService beerService;
@@ -27,7 +26,7 @@ public class BeerController {
     public ResponseEntity<BeerPagedList> listBeers(
             @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
-            @RequestParam(value = "beerStyle", required = false) BeerStyle beerStyle,
+            @RequestParam(value = "beerStyle", required = false) String beerStyle,
             @RequestParam(value = "beerName", required = false) String beerName,
             @RequestParam(value = "showInventoryOnHand", required = false, defaultValue = "false") Boolean showInventoryOnHand
             ){
