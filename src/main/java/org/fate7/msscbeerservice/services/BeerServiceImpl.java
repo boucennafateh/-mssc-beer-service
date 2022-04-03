@@ -1,12 +1,14 @@
 package org.fate7.msscbeerservice.services;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.fate7.msscbeerservice.Domain.Beer;
 import org.fate7.msscbeerservice.repositories.BeerRepository;
 import org.fate7.msscbeerservice.web.controller.NotFoundException;
 import org.fate7.msscbeerservice.web.mapper.BeerMapper;
 import org.fate7.msscbeerservice.web.model.BeerDto;
 import org.fate7.msscbeerservice.web.model.BeerPagedList;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -17,12 +19,14 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BeerServiceImpl implements BeerService{
 
     private final BeerRepository beerRepository;
     private final BeerMapper beerMapper;
 
     @Override
+    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false")
     public BeerDto getBeerById(UUID beerId, Boolean showInventoryOnHand) {
         Beer beer = beerRepository.findById(beerId).orElseThrow(() -> {
             throw new NotFoundException("Beer Id " + beerId + " not found");
@@ -60,8 +64,12 @@ public class BeerServiceImpl implements BeerService{
     }
 
     @Override
+    @Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false")
     public BeerPagedList listBeers(String beerName, String beerStyle, PageRequest pageRequest,
                                    Boolean showInventoryOnHand) {
+
+        log.info("calling the listBeers method");
+
         BeerPagedList beerPagedList;
         Page<Beer> beerPage;
 
