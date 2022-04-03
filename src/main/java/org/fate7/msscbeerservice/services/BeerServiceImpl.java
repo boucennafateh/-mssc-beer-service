@@ -111,4 +111,14 @@ public class BeerServiceImpl implements BeerService{
 
 
     }
+
+    @Override
+    public BeerDto getBeerByUpc(String upc, Boolean showInventoryOnHand) {
+        Beer beer = beerRepository.findByUpc(upc).orElseThrow(() -> {
+            throw new NotFoundException("Beer upc " + upc + " not found");
+        });
+        if(showInventoryOnHand)
+            return beerMapper.toBeerDtoWithInventory(beer);
+        return beerMapper.toBeerDto(beer);
+    }
 }
