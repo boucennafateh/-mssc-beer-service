@@ -113,6 +113,7 @@ public class BeerServiceImpl implements BeerService{
     }
 
     @Override
+    @Cacheable(cacheNames = "beerUpcCache", key = "#upc", condition = "#showInventoryOnHand == false")
     public BeerDto getBeerByUpc(String upc, Boolean showInventoryOnHand) {
         Beer beer = beerRepository.findByUpc(upc).orElseThrow(() -> {
             throw new NotFoundException("Beer upc " + upc + " not found");
