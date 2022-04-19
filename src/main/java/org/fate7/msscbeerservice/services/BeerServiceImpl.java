@@ -70,7 +70,7 @@ public class BeerServiceImpl implements BeerService{
 
         log.info("calling the listBeers method");
 
-        BeerPagedList beerPagedList;
+        //BeerPagedList beerPagedList;
         Page<Beer> beerPage;
 
         if(StringUtils.hasText(beerName) && StringUtils.hasText(beerStyle))
