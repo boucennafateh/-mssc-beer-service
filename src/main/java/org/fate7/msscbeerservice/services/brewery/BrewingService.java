@@ -1,4 +1,4 @@
-package org.fate7.msscbeerservice.services;
+package org.fate7.msscbeerservice.services.brewery;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
