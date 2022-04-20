@@ -1,4 +1,4 @@
-package org.fate7.msscbeerservice.events;
+package common.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

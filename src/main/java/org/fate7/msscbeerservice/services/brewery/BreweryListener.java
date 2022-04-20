@@ -1,11 +1,11 @@
 package org.fate7.msscbeerservice.services.brewery;
 
+import common.events.BrewBeerEvent;
+import common.events.NewInventoryEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.fate7.msscbeerservice.Domain.Beer;
 import org.fate7.msscbeerservice.config.JmsConfig;
-import org.fate7.msscbeerservice.events.BrewBeerEvent;
-import org.fate7.msscbeerservice.events.NewInventoryEvent;
 import org.fate7.msscbeerservice.repositories.BeerRepository;
 import org.fate7.msscbeerservice.web.model.BeerDto;
 import org.springframework.jms.annotation.JmsListener;
