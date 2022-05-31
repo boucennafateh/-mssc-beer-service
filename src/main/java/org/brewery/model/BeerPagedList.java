@@ -1,4 +1,4 @@
-package org.fate7.msscbeerservice.web.model;
+package org.brewery.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

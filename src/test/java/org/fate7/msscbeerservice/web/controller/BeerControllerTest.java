@@ -1,10 +1,10 @@
 package org.fate7.msscbeerservice.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.brewery.model.BeerDto;
+import org.brewery.model.BeerStyle;
 import org.fate7.msscbeerservice.bootstrap.BeerLoader;
 import org.fate7.msscbeerservice.services.BeerService;
-import org.fate7.msscbeerservice.web.model.BeerDto;
-import org.fate7.msscbeerservice.web.model.BeerStyle;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

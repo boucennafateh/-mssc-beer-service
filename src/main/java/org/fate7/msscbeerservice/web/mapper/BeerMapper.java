@@ -1,7 +1,7 @@
 package org.fate7.msscbeerservice.web.mapper;
 
+import org.brewery.model.BeerDto;
 import org.fate7.msscbeerservice.Domain.Beer;
-import org.fate7.msscbeerservice.web.model.BeerDto;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

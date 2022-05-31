@@ -1,4 +1,4 @@
-package org.fate7.msscbeerservice.web.model;
+package org.brewery.model;
 
 public enum BeerStyle {
     LAGER,

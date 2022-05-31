@@ -1,9 +1,9 @@
 package org.fate7.msscbeerservice.web.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.brewery.model.BeerDto;
+import org.brewery.model.BeerPagedList;
 import org.fate7.msscbeerservice.services.BeerService;
-import org.fate7.msscbeerservice.web.model.BeerDto;
-import org.fate7.msscbeerservice.web.model.BeerPagedList;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -2,12 +2,12 @@ package org.fate7.msscbeerservice.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.brewery.model.BeerDto;
+import org.brewery.model.BeerPagedList;
 import org.fate7.msscbeerservice.Domain.Beer;
 import org.fate7.msscbeerservice.repositories.BeerRepository;
 import org.fate7.msscbeerservice.web.controller.NotFoundException;
 import org.fate7.msscbeerservice.web.mapper.BeerMapper;
-import org.fate7.msscbeerservice.web.model.BeerDto;
-import org.fate7.msscbeerservice.web.model.BeerPagedList;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

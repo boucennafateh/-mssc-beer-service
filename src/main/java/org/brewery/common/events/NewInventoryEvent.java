@@ -1,6 +1,6 @@
-package common.events;
+package org.brewery.common.events;
 
-import org.fate7.msscbeerservice.web.model.BeerDto;
+import org.brewery.model.BeerDto;
 
 public class NewInventoryEvent extends BeerEvent{
 
