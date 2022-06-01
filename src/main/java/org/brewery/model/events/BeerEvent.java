@@ -1,4 +1,4 @@
-package org.brewery.common.events;
+package org.brewery.model.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
